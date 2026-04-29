@@ -8,8 +8,8 @@ use windows_sys::Win32::Graphics::Gdi::*;
 use windows_sys::Win32::System::LibraryLoader::GetModuleHandleW;
 use windows_sys::Win32::UI::WindowsAndMessaging::*;
 
-const CHAR_W: i32 = 14;
-const CHAR_H: i32 = 22;
+const CHAR_W: i32 = 20;
+const CHAR_H: i32 = 24;
 const FONT_HEIGHT: i32 = 20;
 const FADE_ALPHA: u8 = 6;
 const FRAME_INTERVAL_MS: u32 = 16;
@@ -179,7 +179,7 @@ fn rand_f32(s: &mut u64) -> f32 {
 
 unsafe fn create_font() -> HFONT {
     let mut face = [0u16; 32];
-    for (i, c) in "Consolas".encode_utf16().enumerate() {
+    for (i, c) in "MS Gothic".encode_utf16().enumerate() {
         face[i] = c;
     }
     let lf = LOGFONTW {
@@ -191,10 +191,10 @@ unsafe fn create_font() -> HFONT {
         lfItalic: 0,
         lfUnderline: 0,
         lfStrikeOut: 0,
-        lfCharSet: DEFAULT_CHARSET as u8,
-        lfOutPrecision: OUT_DEFAULT_PRECIS as u8,
+        lfCharSet: SHIFTJIS_CHARSET as u8,
+        lfOutPrecision: OUT_TT_PRECIS as u8,
         lfClipPrecision: CLIP_DEFAULT_PRECIS as u8,
-        lfQuality: NONANTIALIASED_QUALITY as u8,
+        lfQuality: CLEARTYPE_QUALITY as u8,
         lfPitchAndFamily: (FIXED_PITCH | FF_MODERN) as u8,
         lfFaceName: face,
     };
